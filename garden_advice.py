@@ -18,36 +18,28 @@ SEASON_PLANT_RECOMMENDATIONS = {
 }
 
 
-def get_season_advice(season: str) -> str:
-    """Return gardening advice based on the season."""
-    return SEASON_ADVICE.get(season, "No advice for this season.")
+def get_season_advice(season):
+    if season == "summer":
+        return "Water your plants regularly and provide some shade."
+    elif season == "winter":
+        return "Protect your plants from frost with covers."
+    return "No advice for this season."
 
 
-def get_plant_advice(plant_type: str) -> str:
-    """Return gardening advice based on the plant type."""
-    return PLANT_ADVICE.get(plant_type, "No advice for this type of plant.")
+def get_plant_advice(plant_type):
+    if plant_type == "flower":
+        return "Use fertiliser to encourage blooms."
+    elif plant_type == "vegetable":
+        return "Keep an eye out for pests!"
+    return "No advice for this type of plant."
 
 
-def recommend_plants(season: str) -> str:
-    """Recommend plants suitable for the given season."""
-    plants = SEASON_PLANT_RECOMMENDATIONS.get(season)
-    if plants:
-        return f"Recommended plants for {season}: {', '.join(plants)}."
-    return "No plant recommendations available for this season."
+def generate_advice(season, plant_type):
+    return get_season_advice(season) + "\n" + get_plant_advice(plant_type)
 
 
-def generate_advice(season: str, plant_type: str) -> str:
-    """Generate combined gardening advice."""
-    advice = get_season_advice(season) + "\n"
-    advice += get_plant_advice(plant_type) + "\n"
-    advice += recommend_plants(season)
-    return advice
-
-
-# Main program
 if __name__ == "__main__":
-    season = input("Enter the season (e.g., summer, winter): ").lower()
-    plant_type = input("Enter the type of plant (e.g., flower, vegetable): ").lower()
-
-    print("\n" + generate_advice(season, plant_type))
+    season = input("Enter the season: ").lower()
+    plant_type = input("Enter the type of plant: ").lower()
+    print(generate_advice(season, plant_type))
 
